@@ -1,6 +1,7 @@
 /* Custom properties */
 :root {
   --clr-primary-300: hsl(71, 73%, 54%);
+  --clr-primary-350: hsl(71, 73%, 44%);
   --clr-primary-400: hsl(179, 62%, 47%);
   --clr-primary-500: hsl(179, 62%, 43%);
   --clr-primary-600: hsl(179, 62%, 33%);
@@ -14,6 +15,7 @@
 
   --fs-500: 0.875rem;
   --fs-600: 1rem;
+  --fs-650: 1.15rem;
   --fs-700: 1.1rem;
   --fs-800: 1.25rem;
   --fs-900: 2rem;
@@ -21,6 +23,14 @@
   --fw-200: 200;
   --fw-400: 400;
   --fw-700: 700;
+}
+
+@media screen {
+  :root {
+    --fs-500: 0.9375rem;
+    --fs-700: 1.25rem;
+    --fs-800: 1.5rem;
+  }
 }
 
 /* CSS Reset */
@@ -127,15 +137,22 @@ a {
 }
 
 .title {
-  --fs-700: 1.1rem;
   font-size: var(--fs-700);
   font-weight: var(--fw-700);
 }
 
 .flex-group {
+  --spacing: 1.15rem;
+
   display: flex;
   flex-direction: column;
-  gap: 1.15rem;
+  gap: var(--spacing);
+}
+
+@media (min-width: 40.5rem) {
+  .flex-group {
+    --spacing: 1.15rem;
+  }
 }
 
 .btn {
@@ -149,6 +166,18 @@ a {
   box-shadow: 0px 12px 40px -7px rgba(0, 0, 0, 0.35);
   -webkit-box-shadow: 0px 12px 40px -7px rgba(0, 0, 0, 0.35);
   -moz-box-shadow: 0px 12px 40px -7px rgba(0, 0, 0, 0.35);
+  transition: background-color 0.2s ease;
+}
+
+@media (min-width: 40.5rem) {
+  .btn {
+    margin-top: 0.5rem;
+  }
+}
+
+.btn:is(:hover, :focus) {
+  background-color: var(--clr-primary-350);
+  outline: transparent;
 }
 
 /* General styling */
@@ -159,6 +188,15 @@ body {
   font-family: var(--ff-base);
   font-size: var(--fs-500);
   background-color: var(--clr-neutral-200);
+}
+
+@media (min-width: 40.5rem) {
+  body {
+    --padding-body: 0;
+
+    display: grid;
+    place-items: center;
+  }
 }
 
 footer {
@@ -174,6 +212,14 @@ footer {
   text-align: center;
 }
 
+@media (min-width: 40.5rem) {
+  footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+  }
+}
+
 footer a {
   color: var(--clr-primary-500);
   transition: color, text-decoration;
@@ -181,6 +227,7 @@ footer a {
 }
 
 footer a:is(:hover, :focus) {
+  outline: transparent;
   color: var(--clr-primary-600);
   text-decoration: underline;
 }
@@ -190,16 +237,38 @@ footer a:is(:hover, :focus) {
   background-color: var(--clr-neutral-100);
   border-radius: 0.5rem;
   overflow: hidden;
+  max-width: 19.375rem;
+  margin: auto;
   box-shadow: 0px 6px 50px -8px rgba(0, 0, 0, 0.37);
   -webkit-box-shadow: 0px 6px 50px -8px rgba(0, 0, 0, 0.37);
   -moz-box-shadow: 0px 6px 50px -8px rgba(0, 0, 0, 0.37);
+}
+
+@media (min-width: 40.5rem) {
+  .banner {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 39.6875rem;
+  }
 }
 
 .banner__article {
   padding: 1.65rem 1.375rem 2rem 1.375rem;
 }
 
+@media (min-width: 40.5rem) {
+  .banner__article {
+    padding: 2.5rem;
+  }
+}
+
 /* Join card */
+@media (min-width: 40.5rem) {
+  .join {
+    grid-column: 1 / -1;
+  }
+}
+
 .join__title {
   font-size: var(--fs-800);
   color: var(--clr-primary-500);
@@ -208,12 +277,18 @@ footer a:is(:hover, :focus) {
 
 .join__subtitle {
   color: var(--clr-primary-300);
-  font-size: var(--fs-600);
+  font-size: var(--fs-650);
+  padding-bottom: 0.55rem;
 }
 
 .join__description {
   line-height: 1.8;
   color: var(--clr-neutral-300);
+}
+@media (min-width: 40.5rem) {
+  .join__description {
+    padding-right: 1rem;
+  }
 }
 
 /* Pricing card */
@@ -234,7 +309,7 @@ footer a:is(:hover, :focus) {
 .pricing__option {
   color: var(--clr-neutral-200);
   font-weight: var(--fw-200);
-  font-size: var(--fs-600);
+  font-size: var(--fs-500);
   display: flex;
   gap: 0.85rem;
   align-items: center;
